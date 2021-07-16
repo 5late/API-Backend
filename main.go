@@ -60,12 +60,31 @@ func GetAllPeople(response http.ResponseWriter, request *http.Request) {
 	}
 }
 
+func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
+	body, err := ioutil.ReadAll(request.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var person Person
+	err = json.Unmarshal(body, &person)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(person)
+
+	file, _ := json.MarshalIndent(person, "", "    ")
+
+	_ = ioutil.WriteFile("./people/"+fmt.Sprint(person.ID)+".json", file, 0644)
+	result := `{"message":"Noice"}`
+	json.NewEncoder(response).Encode(result)
+}
+
 func main() {
 	fmt.Println("Starting the api....")
 	route := mux.NewRouter()
 	router := cors.Default().Handler(route)
 
-	//route.HandleFunc("/person", CreatePersonEndpoint).Methods("POST")
+	route.HandleFunc("/person", CreatePersonEndpoint).Methods("POST")
 	route.HandleFunc("/people", GetAllPeople).Methods("GET")
 	//route.HandleFunc("/person/{id}", GetPersonEndpoint).Methods("GET")
 	//route.HandleFunc("/rmperson/{id}", DeletePersonEndpoint).Methods("DELETE")
