@@ -20,7 +20,7 @@ type Person struct {
 	ID        int    `json:"id"`
 	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
-	BirthDate string `json:"birthday"`
+	BirthDate string `json:"birthdate"`
 	Age       int    `json:"age"`
 }
 
