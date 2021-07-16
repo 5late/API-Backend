@@ -42,18 +42,11 @@ func GetAllPeople(response http.ResponseWriter, request *http.Request) {
 
 	byteValue, _ := ioutil.ReadAll(json_file)
 
-	var people People
+	var person []Person
 
-	json.Unmarshal(byteValue, &people)
-	fmt.Println(people)
-	for ii := 0; ii < len(people.People); ii++ {
-		fmt.Println("User ID: ", people.People[ii].ID)
-		fmt.Println("User First Name: " + people.People[ii].FirstName)
-		fmt.Println("User Last Name: " + people.People[ii].LastName)
-		fmt.Println("User Birth Date" + people.People[ii].BirthDate)
-		fmt.Println("User Age:", people.People[ii].Age)
-	}
-	json.NewEncoder(response).Encode(people)
+	json.Unmarshal(byteValue, &person)
+	fmt.Println(person)
+	json.NewEncoder(response).Encode(person)
 }
 
 func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
@@ -77,15 +70,17 @@ func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
 		log.Println(err)
 	}
 
-	datas := []People{}
+	datas := []Person{}
 
 	json.Unmarshal(allfile, &datas)
 
 	//Define what we want to add
-	newStruct := &People{
-		[]Person{
-			person,
-		},
+	newStruct := &Person{
+		ID:        person.ID,
+		FirstName: person.FirstName,
+		LastName:  person.LastName,
+		BirthDate: person.BirthDate,
+		Age:       person.Age,
 	}
 
 	datas = append(datas, *newStruct)

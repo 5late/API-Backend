@@ -1,79 +1,58 @@
 [
     {
-        "people": [
-            {
-                "id": 2,
-                "firstname": "Jo",
-                "lastname": "Do",
-                "birthdate": "Jan 3, 1998",
-                "age": 23
-            }
-        ]
+        "id": 0,
+        "firstname": "",
+        "lastname": "",
+        "birthdate": "",
+        "age": 0
     },
     {
-        "people": [
-            {
-                "id": 2,
-                "firstname": "Jo",
-                "lastname": "Do",
-                "birthdate": "Jan 3, 1998",
-                "age": 23
-            }
-        ]
+        "id": 0,
+        "firstname": "",
+        "lastname": "",
+        "birthdate": "",
+        "age": 0
     },
     {
-        "people": [
-            {
-                "id": 2,
-                "firstname": "Jo",
-                "lastname": "Do",
-                "birthdate": "Jan 3, 1998",
-                "age": 23
-            }
-        ]
+        "id": 0,
+        "firstname": "",
+        "lastname": "",
+        "birthdate": "",
+        "age": 0
     },
     {
-        "people": [
-            {
-                "id": 2,
-                "firstname": "Jo",
-                "lastname": "Do",
-                "birthdate": "Jan 3, 1998",
-                "age": 23
-            }
-        ]
+        "id": 0,
+        "firstname": "",
+        "lastname": "",
+        "birthdate": "",
+        "age": 0
     },
     {
-        "people": [
-            {
-                "id": 2,
-                "firstname": "Jo",
-                "lastname": "Do",
-                "birthdate": "Jan 3, 1998",
-                "age": 23
-            }
-        ]
+        "id": 0,
+        "firstname": "",
+        "lastname": "",
+        "birthdate": "",
+        "age": 0
     },
     {
-        "people": [
-            {
-                "id": 2,
-                "firstname": "Jo",
-                "lastname": "Do",
-                "birthdate": "Jan 3, 1998",
-                "age": 23
-            }
-        ]
+        "id": 0,
+        "firstname": "",
+        "lastname": "",
+        "birthdate": "",
+        "age": 0
     },
     {
-        "people": [
-            {
-                "id": 2,
-                "firstname": "Jo",
-                "lastname": "Do",
-                "birthdate": "Jan 3, 1998",
-                "age": 23
-            }
-        ]
+        "id": 0,
+        "firstname": "",
+        "lastname": "",
+        "birthdate": "",
+        "age": 0
+    },
+    {
+        "id": 2,
+        "firstname": "Jo",
+        "lastname": "Do",
+        "birthdate": "Jan 3, 1998",
+        "age": 23
     }
 ]
