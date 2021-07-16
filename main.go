@@ -46,11 +46,6 @@ func GetAllPeople(response http.ResponseWriter, request *http.Request) {
 
 	json.Unmarshal(byteValue, &person)
 	fmt.Println(person)
-	/*fmt.Println("User ID: ", person.People[ii].ID)
-	fmt.Println("User First Name: " + person.People[ii].FirstName)
-	fmt.Println("User Last Name: " + person.People[ii].LastName)
-	fmt.Println("User Birth Date" + person.People[ii].BirthDate)
-	fmt.Println("User Age:", person.People[ii].Age)*/
 	json.NewEncoder(response).Encode(person)
 }
 
