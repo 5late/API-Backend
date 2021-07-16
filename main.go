@@ -34,30 +34,26 @@ func whereyoulooking(response http.ResponseWriter, request *http.Request) {
 }
 
 func GetAllPeople(response http.ResponseWriter, request *http.Request) {
-	files, _ := ioutil.ReadDir("./people/")
-	file_count := len(files)
-	for i := 0; i < file_count; i++ {
-		json_file, err := os.Open("./people/" + fmt.Sprint(i) + ".json")
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer json_file.Close()
-
-		byteValue, _ := ioutil.ReadAll(json_file)
-
-		var people People
-
-		json.Unmarshal(byteValue, &people)
-		fmt.Println(people)
-		for ii := 0; ii < len(people.People); ii++ {
-			fmt.Println("User ID: ", people.People[ii].ID)
-			fmt.Println("User First Name: " + people.People[ii].FirstName)
-			fmt.Println("User Last Name: " + people.People[ii].LastName)
-			fmt.Println("User Birth Date" + people.People[ii].BirthDate)
-			fmt.Println("User Age:", people.People[ii].Age)
-		}
-		json.NewEncoder(response).Encode(people)
+	json_file, err := os.Open("./people/all.json")
+	if err != nil {
+		log.Fatal(err)
 	}
+	defer json_file.Close()
+
+	byteValue, _ := ioutil.ReadAll(json_file)
+
+	var people People
+
+	json.Unmarshal(byteValue, &people)
+	fmt.Println(people)
+	for ii := 0; ii < len(people.People); ii++ {
+		fmt.Println("User ID: ", people.People[ii].ID)
+		fmt.Println("User First Name: " + people.People[ii].FirstName)
+		fmt.Println("User Last Name: " + people.People[ii].LastName)
+		fmt.Println("User Birth Date" + people.People[ii].BirthDate)
+		fmt.Println("User Age:", people.People[ii].Age)
+	}
+	json.NewEncoder(response).Encode(people)
 }
 
 func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
