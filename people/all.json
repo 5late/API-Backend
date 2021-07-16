@@ -1,19 +1,24 @@
-{
-    "people":[
-        {
-            "id": 1,
-            "firstname": "John",
-            "lastname": "Doe",
-            "birthdate": "Jan 1, 1996",
-            "age": 25
-        },
-        {
-            "id": 1,
-            "firstname": "Joe",
-            "lastname": "Doe",
-            "birthdate": "Jan 2, 1997",
-            "age": 24
-        }
-        
-    ]
-}
+[
+    {
+        "people": [
+            {
+                "id": 2,
+                "firstname": "Jo",
+                "lastname": "Do",
+                "birthdate": "Jan 3, 1998",
+                "age": 23
+            }
+        ]
+    },
+    {
+        "people": [
+            {
+                "id": 2,
+                "firstname": "Jo",
+                "lastname": "Do",
+                "birthdate": "Jan 3, 1998",
+                "age": 23
+            }
+        ]
+    }
+]

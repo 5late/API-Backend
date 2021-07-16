@@ -71,6 +71,39 @@ func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
 	file, _ := json.MarshalIndent(person, "", "    ")
 
 	_ = ioutil.WriteFile("./people/"+fmt.Sprint(person.ID)+".json", file, 0644)
+
+	allfile, err := ioutil.ReadFile("./people/all.json")
+	if err != nil {
+		log.Println(err)
+	}
+
+	datas := []People{}
+
+	json.Unmarshal(allfile, &datas)
+
+	//Define what we want to add
+	newStruct := &People{
+		[]Person{
+			person,
+		},
+	}
+
+	datas = append(datas, *newStruct)
+
+	//JSON-lize the data defined above
+	dataBytes, err := json.MarshalIndent(datas, "", "    ")
+	//Error handling
+	if err != nil {
+		log.Println(err)
+	}
+
+	//Write it to the file
+	err = ioutil.WriteFile("./people/all.json", dataBytes, 0644)
+	//Error handling
+	if err != nil {
+		log.Println(err)
+	}
+
 	result := `{"message":"Noice"}`
 	json.NewEncoder(response).Encode(result)
 }
