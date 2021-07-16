@@ -77,15 +77,17 @@ func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
 		log.Println(err)
 	}
 
-	datas := []People{}
+	datas := []Person{}
 
 	json.Unmarshal(allfile, &datas)
 
 	//Define what we want to add
-	newStruct := &People{
-		[]Person{
-			person,
-		},
+	newStruct := &Person{
+		ID:        person.ID,
+		FirstName: person.FirstName,
+		LastName:  person.LastName,
+		BirthDate: person.BirthDate,
+		Age:       person.Age,
 	}
 
 	datas = append(datas, *newStruct)
