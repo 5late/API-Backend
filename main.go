@@ -104,7 +104,7 @@ func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
 		log.Println(err)
 	}
 
-	result := `{"status":"200", "message":"Noice"}`
+	result := `{"status":200, "message":"Noice"}`
 	var finalResult map[string]interface{}
 	json.Unmarshal([]byte(result), &finalResult)
 
