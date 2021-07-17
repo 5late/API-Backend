@@ -26,9 +26,13 @@ type Person struct {
 }
 
 type Appointment struct {
-	Date   string `json:"date"`
-	Time   string `json:"time"`
-	Reason string `json:"reason"`
+	ID        json.Number `json:"id"`
+	FirstName string      `json:"firstname"`
+	LastName  string      `json:"lastname"`
+	Date      string      `json:"date"`
+	Time      string      `json:"time"`
+	Reason    string      `json:"reason"`
+	DiscordID string      `json:"discordid"`
 }
 
 func whereyoulooking(response http.ResponseWriter, request *http.Request) {
@@ -88,6 +92,7 @@ func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
 		LastName:  person.LastName,
 		BirthDate: person.BirthDate,
 		Age:       person.Age,
+		DiscordID: person.DiscordID,
 	}
 
 	datas = append(datas, *newStruct)
@@ -114,7 +119,62 @@ func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
 }
 
 func CreateAppointment(response http.ResponseWriter, request *http.Request) {
+	body, err := ioutil.ReadAll(request.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var appointment Appointment
+	err = json.Unmarshal(body, &appointment)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(appointment)
 
+	file, _ := json.MarshalIndent(appointment, "", "    ")
+
+	_ = ioutil.WriteFile("./appointments/"+fmt.Sprint(appointment.ID)+".json", file, 0644)
+
+	allfile, err := ioutil.ReadFile("./appointments/all.json")
+	if err != nil {
+		log.Println(err)
+	}
+
+	datas := []Appointment{}
+
+	json.Unmarshal(allfile, &datas)
+
+	//Define what we want to add
+	newStruct := &Appointment{
+		ID:        appointment.ID,
+		FirstName: appointment.FirstName,
+		LastName:  appointment.LastName,
+		Date:      appointment.Date,
+		Time:      appointment.Time,
+		Reason:    appointment.Reason,
+		DiscordID: appointment.DiscordID,
+	}
+
+	datas = append(datas, *newStruct)
+
+	//JSON-lize the data defined above
+	dataBytes, err := json.MarshalIndent(datas, "", "    ")
+	//Error handling
+	if err != nil {
+		log.Println(err)
+	}
+
+	//Write it to the file
+	err = ioutil.WriteFile("./appointments/all.json", dataBytes, 0644)
+	//Error handling
+	if err != nil {
+		log.Println(err)
+	}
+
+	result := `{"status":200, "message":"Noice"}`
+	var finalResult map[string]interface{}
+	json.Unmarshal([]byte(result), &finalResult)
+
+	json.NewEncoder(response).Encode(finalResult)
 }
 
 func main() {
