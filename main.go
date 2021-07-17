@@ -17,11 +17,18 @@ type People struct {
 }
 
 type Person struct {
-	ID        int    `json:"id"`
-	FirstName string `json:"firstname"`
-	LastName  string `json:"lastname"`
-	BirthDate string `json:"birthdate"`
-	Age       int    `json:"age"`
+	ID        json.Number `json:"id"`
+	FirstName string      `json:"firstname"`
+	LastName  string      `json:"lastname"`
+	BirthDate string      `json:"birthdate"`
+	Age       json.Number `json:"age"`
+	DiscordID json.Number `json:"discordid"`
+}
+
+type Appointment struct {
+	Date   string `json:"date"`
+	Time   string `json:"time"`
+	Reason string `json:"reason"`
 }
 
 func whereyoulooking(response http.ResponseWriter, request *http.Request) {
@@ -106,6 +113,10 @@ func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
 	json.NewEncoder(response).Encode(finalResult)
 }
 
+func CreateAppointment(response http.ResponseWriter, request *http.Request) {
+
+}
+
 func main() {
 	fmt.Println("Starting the api....")
 	route := mux.NewRouter()
@@ -113,6 +124,7 @@ func main() {
 
 	route.HandleFunc("/person", CreatePersonEndpoint).Methods("POST")
 	route.HandleFunc("/people", GetAllPeople).Methods("GET")
+	route.HandleFunc("/createApp", CreateAppointment).Methods("POST")
 	//route.HandleFunc("/person/{id}", GetPersonEndpoint).Methods("GET")
 	//route.HandleFunc("/rmperson/{id}", DeletePersonEndpoint).Methods("DELETE")
 	//route.HandleFunc("/changeperson/{id}/{type}/{value}", UpdatePersonEndpoint).Methods("PATCH")
