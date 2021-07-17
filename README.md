@@ -1,11 +1,7 @@
 # API / Backend
 
-## Usage
+#### The API/Backend for a submission to the xdHacks Mini Toronto Hackaton
 
-#### GET ENDPOINT
+**Written completely in Go, by [5late](https://github.com/5late)**
 
-- ``/people`` - Returns all people
-
-#### POST ENDPOINT
-
-- ``/person`` - Create a person endpoint
+#### Docs can be found [here](./docs/)
