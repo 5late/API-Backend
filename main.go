@@ -32,6 +32,7 @@ type Appointment struct {
 	Date      string      `json:"date"`
 	Time      string      `json:"time"`
 	Reason    string      `json:"reason"`
+	DiscordID string      `json:"discordid"`
 }
 
 func whereyoulooking(response http.ResponseWriter, request *http.Request) {
@@ -150,6 +151,7 @@ func CreateAppointment(response http.ResponseWriter, request *http.Request) {
 		Date:      appointment.Date,
 		Time:      appointment.Time,
 		Reason:    appointment.Reason,
+		DiscordID: appointment.DiscordID,
 	}
 
 	datas = append(datas, *newStruct)
