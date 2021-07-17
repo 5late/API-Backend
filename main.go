@@ -88,6 +88,7 @@ func CreatePersonEndpoint(response http.ResponseWriter, request *http.Request) {
 		LastName:  person.LastName,
 		BirthDate: person.BirthDate,
 		Age:       person.Age,
+		DiscordID: person.DiscordID,
 	}
 
 	datas = append(datas, *newStruct)
