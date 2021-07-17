@@ -177,6 +177,33 @@ func CreateAppointment(response http.ResponseWriter, request *http.Request) {
 	json.NewEncoder(response).Encode(finalResult)
 }
 
+func GetApp(response http.ResponseWriter, request *http.Request) {
+	params := mux.Vars(request)
+	id := params["id"]
+	if _, err := os.Stat("./appointments/" + id + ".json"); err == nil {
+		json_file, err := os.Open("./appointments/" + id + ".json")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer json_file.Close()
+
+		byteValue, _ := ioutil.ReadAll(json_file)
+
+		var appointment []Appointment
+
+		json.Unmarshal(byteValue, &appointment)
+		fmt.Println(appointment)
+		json.NewEncoder(response).Encode(appointment)
+
+	} else if os.IsNotExist(err) {
+		result := `{"status":404, "message":"File does not exist. Person has no appointment."}`
+		var finalResult map[string]interface{}
+		json.Unmarshal([]byte(result), &finalResult)
+
+		json.NewEncoder(response).Encode(finalResult)
+	}
+}
+
 func main() {
 	fmt.Println("Starting the api....")
 	route := mux.NewRouter()
@@ -185,6 +212,7 @@ func main() {
 	route.HandleFunc("/person", CreatePersonEndpoint).Methods("POST")
 	route.HandleFunc("/people", GetAllPeople).Methods("GET")
 	route.HandleFunc("/createApp", CreateAppointment).Methods("POST")
+	route.HandleFunc("/getApp/{id}", GetApp).Methods("GET")
 	//route.HandleFunc("/person/{id}", GetPersonEndpoint).Methods("GET")
 	//route.HandleFunc("/rmperson/{id}", DeletePersonEndpoint).Methods("DELETE")
 	//route.HandleFunc("/changeperson/{id}/{type}/{value}", UpdatePersonEndpoint).Methods("PATCH")
