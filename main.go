@@ -189,7 +189,7 @@ func GetApp(response http.ResponseWriter, request *http.Request) {
 
 		byteValue, _ := ioutil.ReadAll(json_file)
 
-		var appointment []Appointment
+		var appointment Appointment
 
 		json.Unmarshal(byteValue, &appointment)
 		fmt.Println(appointment)
